@@ -1,0 +1,18 @@
+<template name="listFieldInput">
+    {{#if eq mode 'show'}}
+        <div class="field is-flex is-justify-content-space-between">
+            <div class="w-full pt-2 pb-1">{{field.name}}</div>
+            <div class="w-full pt-2 pb-1">{{field.type}}</div>
+            <button class="x-edit-field"><i class="fas fa-edit"></i></button>
+            <button class="x-delete-field"><i class="fas fa-trash"></i></button>
+        </div>
+    {{/if}}
+    {{#if eq mode 'edit'}}
+        <div class="field is-flex is-justify-content-space-between">
+            <input class="x-field-name input" type="text" autocomplete="off" placeholder="Field Name" name="fieldName"
+                value="{{currentFieldName}}" />
+            {{> dropdownField options=fieldTypes value=selectedFieldType onChange=onTypeSelectChange}}
+            <button class="x-close-edit-field"><i class="fas fa-times"></i></button>
+        </div>
+    {{/if}}
+</template>

@@ -1,0 +1,40 @@
+<template name="thingDetail">
+    <div class="is-flex is-flex-direction-column has-text-white">
+        <button class="x-editThing">Edit</button>
+        <header class="is-size-2">{{thing.name}}</header>
+        {{#if hasThumbnail}}
+            {{> lazyImage size='128px' src=thumbnailSrc}}
+        {{/if}}
+        {{> thingTags tags=thing.tags}}
+        {{#each field in fields}}
+            {{#if eq field.type 'image'}}
+                {{#if neq (getThing field.name) undefined}}
+                    <div class="my-2">
+                        <header>{{field.name}}</header>
+                        {{> lazyImage size='128px' src=thumbnailSrc}}
+                    </div>
+                {{/if}}
+            {{/if}}
+            {{#if eq field.type 'shortText'}}
+                <div class="my-2 is-flex">
+                    <header class="mr-3">{{field.name}}</header>
+                    <div>{{getThing field.name}}</div>
+                </div>
+            {{/if}}
+            {{#if eq field.type 'url'}}
+                {{#if neq (getThing field.name) undefined}}
+                    <div class="my-2">
+                        <a class="button button-secondary" href="{{getThing field.name}}"
+                            target="_blank">{{field.name}}</a>
+                    </div>
+                {{/if}}
+            {{/if}}
+            {{#if eq field.type 'longText'}}
+                <div class="my-2 is-flex">
+                    <header class="mr-3">{{field.name}}</header>
+                    <div>{{getThing field.name}}</div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+</template>

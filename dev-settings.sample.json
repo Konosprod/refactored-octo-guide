@@ -1,0 +1,23 @@
+{
+    "GAPI_KEY": "<YOUR-GAPI-API-KEY>",
+    "GAPI_CLIENT_ID": "<GAPI-CLIENT-ID>",
+    "GAPI_SECRET": "<GAPI-SECRET>",
+    "AWSAccessKeyId": "<YOUR-ACCESS-KEY>",
+    "AWSSecretAccessKey": "<YOUR-SECRET>",
+    "public": {
+        "thumbnails": {
+            "max_dimension": 480
+        },
+        "s3": {
+            "bucketName": "<YOUR-BUCKET-NAME>",
+            "region": "<YOUR-BUCKET-REGION>",
+            "dirname": "<YOUR-OPTIONAL-BUCKET-FOLDER-ENDING-WITH-SLASH-OR-IT-WONT-WORK>",
+            "s3url": "<YOUR-ROOT-S3-URL>"
+        },
+        "IS_TESTING": true,
+        "TEST_USER": {
+            "username": "meteorite",
+            "password": "password"
+        }
+    }
+}

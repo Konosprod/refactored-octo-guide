@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "html.format.enable": true,
+    "html.format.indentHandlebars": true,
+    "html.format.maxPreserveNewLines": 0,
+    "[handlebars]": {
+        "editor.formatOnSave": false
+    },
+    "html.format.indentInnerHtml": true
+}

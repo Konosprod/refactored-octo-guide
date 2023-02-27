@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "start",
+			"problemMatcher": [],
+			"label": "npm: start",
+			"detail": "START /B meteor run --inspect --settings dev-settings.json",
+			"isBackground": true
+		},
+		{
+			"type": "npm",
+			"script": "cypress",
+			"problemMatcher": [],
+			"label": "npm: cypress",
+			"detail": "meteor npx cypress open",
+			"isBackground": true
+		},
+		{
+			"type": "npm",
+			"script": "cypress_headless",
+			"problemMatcher": [],
+			"label": "npm: cypress_headless",
+			"detail": "meteor npx cypress run -b chrome",
+			"isBackground": true
+		},
+		{
+			"type": "npm",
+			"script": "start_tests",
+			"problemMatcher": [],
+			"label": "npm: start_tests",
+			"detail": "meteor run --inspect --settings tests-settings.json",
+			"isBackground": true
+		}
+	]
+}

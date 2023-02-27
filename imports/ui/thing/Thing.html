@@ -1,0 +1,35 @@
+<template name="thing">
+    <li class="x-thingDetail thing is-flex is-flex-direction-column mt-4 mx-1 p-1 cursor-pointer"
+        style="position:relative; width:256px;">
+        {{#if showSelected}}
+            <div style="position:absolute; top:5px; left:10px; z-index:50;">
+                {{#if selected}}
+                    <input type="checkbox" style="pointer-events: none; cursor: default;" checked>
+                {{else}}
+                    <input type="checkbox" style="pointer-events: none; cursor: default;">
+                {{/if}}
+            </div>
+        {{/if}}
+        <div class="is-relative">
+            {{ > lazyImage size='256px' src=(S3Url thumbnail) }}
+            <div
+                class="x-deleteThing w-8 h-8 absolute top-0 right-0 is-clickable has-background-black-ter is-flex is-justify-content-center is-align-items-center">
+                <i class="fas fa-trash has-text-white-ter"></i>
+            </div>
+        </div>
+        <header class="has-text-white-bis is-size-6" style="line-height: 14px">
+            {{thing.name}}
+        </header>
+        {{> thingTags tags=thing.tags}}
+        {{#each field in fields}}
+            {{#if eq field.type 'url'}}
+                {{#if neq (getThing field.name) undefined}}
+                    <div class="my-2">
+                        <a class="p-1 has-background-white" href="{{getThing field.name}}"
+                            target="_blank">{{field.name}}</a>
+                    </div>
+                {{/if}}
+            {{/if}}
+        {{/each}}
+    </li>
+</template>

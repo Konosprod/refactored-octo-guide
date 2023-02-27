@@ -1,0 +1,89 @@
+{
+    "name": "mul",
+    "private": true,
+    "scripts": {
+        "start": "meteor run --inspect --settings dev-settings.json",
+        "start_tests": "meteor run --inspect --settings tests-settings.json",
+        "cypress": "meteor npx cypress open",
+        "cypress_headless": "meteor npx cypress run -b chrome",
+        "visualize": "meteor --production --extra-packages bundle-visualizer",
+        "lint": "eslint .",
+        "pretest": "npm run lint --silent",
+        "eslint": "./node_modules/.bin/eslint --init"
+    },
+    "eslintConfig": {
+        "extends": "@meteorjs/eslint-config-meteor"
+    },
+    "dependencies": {
+        "@babel/runtime": "^7.15.4",
+        "aws-sdk": "^2.1288.0",
+        "bcrypt": "^5.0.1",
+        "buffer": "^6.0.3",
+        "chai": "^4.3.6",
+        "cypress": "^12.1.0",
+        "date-fns": "^2.29.2",
+        "google-auth-library": "^8.3.0",
+        "jquery": "^3.6.0",
+        "meteor-node-stubs": "^1.1.0",
+        "node-s3-public-url": "^1.0.3",
+        "uuid": "^9.0.0"
+    },
+    "meteor": {
+        "mainModule": {
+            "client": "client/main.js",
+            "server": "server/main.js"
+        }
+    },
+    "devDependencies": {
+        "@babel/register": "^7.17.7",
+        "@meteorjs/eslint-config-meteor": "^1.0.5",
+        "autoprefixer": "^10.4.2",
+        "babel-eslint": "^10.1.0",
+        "babel-plugin-istanbul": "^6.1.1",
+        "eslint": "^8.7.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-import-resolver-meteor": "^0.4.0",
+        "eslint-plugin-import": "^2.25.4",
+        "eslint-plugin-jsx-a11y": "^6.5.1",
+        "eslint-plugin-meteor": "^7.3.0",
+        "eslint-plugin-react": "^7.28.0",
+        "jest": "^27.5.1",
+        "mongo-seeding": "^3.7.1",
+        "nyc": "^15.1.0",
+        "prettier": "2.5.1"
+    },
+    "babel": {
+        "env": {
+            "COVERAGE": {
+                "plugins": [
+                    "istanbul"
+                ]
+            }
+        }
+    },
+    "nyc": {
+        "all": true,
+        "include": [
+            "client/**/*.js",
+            "imports/**/*.js",
+            "server/**/*.js"
+        ],
+        "exclude": [
+            "**/*.test.js"
+        ],
+        "reporter": [
+            "text-summary",
+            "html"
+        ],
+        "require": [
+            "@babel/register"
+        ],
+        "extension": [
+            ".js"
+        ],
+        "cache": true,
+        "temp-dir": "./dist/tests/.nyc-temp",
+        "report-dir": "./dist/tests/nyc"
+    }
+}

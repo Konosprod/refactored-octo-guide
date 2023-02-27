@@ -1,0 +1,17 @@
+<template name="lazyImage">
+    <div style="width:{{size}}; height:{{size}}; position:relative;">
+        <div class="has-background-black-bis" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
+        {{#if loading}}
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%); ">
+                {{> loadingSpinner size="30px"}}
+            </div>
+        {{/if}}
+        {{#if noImage}}
+            <div class="has-text-white" style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)">
+                No image
+            </div>
+        {{/if}}
+        <img class="image lazy has-background-black-bis" onload="this.style.opacity = '1'" src="{{ loadedSrc }}"
+            style="width:{{size}}; height:{{size}}; transition:0.35s; opacity:0;">
+    </div>
+</template>

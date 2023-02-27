@@ -1,0 +1,66 @@
+<body class="has-background-black-bis h-screen w-screen">
+    <div id="g_id_onload"
+        data-client_id="{{settings.public.GAPI_CLIENT_ID}}"
+        data-callback="onSignIn">
+    </div>
+    {{#if isUserLogged}}
+        {{> applicationContainer}}
+    {{else}}
+        {{> login}}
+    {{/if}}
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function onSignIn(googleUser) {
+            console.info('user logged in!', googleUser)
+            document.dispatchEvent(new CustomEvent('googleUserSignedIn', { detail: googleUser }))
+        }
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
+</body>
+<template name="applicationContainer">
+    <!-- TOPBAR -->
+    <div class="has-background-black is-flex is-justify-content-space-between is-align-items-center px-3 py-2">
+        <h1 class="x-brand is-size-7">My Ultimate list</h1>
+        {{#if isUserLogged}}
+            <div>
+                <span data-cy="top_bar_username">Hello {{user.profile.name}}!</span>
+                <button class="x-logout button is-dark is-small ml-2">
+                    Logout
+                </button>
+            </div>
+        {{/if}}
+    </div>
+    <div class="is-flex w-full h-full">
+        <!-- LIST CONTAINER -->
+        <section
+            class="has-background-black-ter h-full is-flex-grow-1 is-flex is-flex-direction-column is-align-content-center px-3"
+            style="overflow-y: auto">
+            {{#if hasSelectedList}}
+                {{> listContainer selectedList=selectedList}}
+            {{else}}
+                <aside class="listsMenu menu">
+                    <p class="menu-label">Lists</p>
+                    <ul class="menu-list">
+                        {{#each list in lists}}
+                            {{> listMenuItem list=list}}
+                        {{/each}}
+                    </ul>
+                </aside>
+                <button class="x-addNewList button is-primary float-right mt-3">
+                    New list
+                </button>
+            {{/if}}
+        </section>
+        {{#if session 'isInspectorOpen' }}
+            {{> inspector }}
+        {{/if}}
+    </div>
+    {{#if session 'isModalOpen' }}
+        {{> modalContainer }}
+    {{/if}}
+</template>

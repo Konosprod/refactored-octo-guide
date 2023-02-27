@@ -1,0 +1,28 @@
+<template name="tagsInput">
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Tags</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <label for="tagAdder" class="input-box is-flex is-flex-wrap-wrap">
+                    {{#each tag in tags}}
+                        <div class="is-flex is-flex has-text-white bg-primary rounded-sm px-3 py-1 mx-1 my-1"
+                            style="white-space: nowrap">
+                            {{tag}}
+                            <span class="x-removeTag ml-2 cursor-pointer" data-tag="{{tag}}">x</span>
+                        </div>
+                        <input class="input is-hidden" type="hidden" name="tags" value="{{tag}}" />
+                    {{/each}}
+                    <input id="tagAdder" class="x-addTag" type="text" autocomplete="off" />
+                </label>
+                {{#if neq errors ''}}
+                    <div class="errors-container box animate slow zoomin">
+                        <header class="is-title has-text-danger">Errors</header>
+                        <p>{{errors}}</p>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>

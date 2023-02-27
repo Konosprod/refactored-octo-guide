@@ -1,0 +1,4 @@
+node_modules/
+aws-settings.js
+prod-settings.json
+dev-settings.json

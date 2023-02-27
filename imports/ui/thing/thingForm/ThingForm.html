@@ -1,0 +1,92 @@
+<template name="thingForm">
+    {{#if isInsert}}
+    <header>Add thing</header>
+    {{else}}
+    <header>Edit thing</header>
+    {{/if}}
+    <!-- errors container -->
+    {{#if greaterThan errors.length 0}}
+        <div class="errors-container box animate slow zoomin">
+            <header class="is-title has-text-danger">Errors</header>
+            <ul>
+                {{#each error in errors}}
+                    <li>{{error}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+    <!-- name field -->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Name</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                {{#if thing.name}}
+                    <input class="input" type="text" name="name" autocomplete="off" value="{{thing.name}}" />
+                {{else}}
+                    <input class="input" type="text" name="name" autocomplete="off" />
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    <!-- tags field -->
+    {{#if thing.tags}}
+        {{> tagsInput tags=thing.tags}}
+    {{else}}
+        {{> tagsInput }}
+    {{/if}}
+
+    {{#each field in fields}}
+        {{#if eq field.type 'image'}}
+            {{> imageField name=field.name S3ObjectName=(getThing field.name)}}
+        {{/if}}
+        {{#if eq field.type 'shortText'}}
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">{{field.name}}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <input class="input" type="text" name="{{field.name}}" autocomplete="off" value="{{getThing field.name}}"/>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+        {{#if eq field.type 'url'}}
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">{{field.name}}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <input class="input" type="text" name="{{field.name}}" autocomplete="off" value="{{getThing field.name}}" />
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+        {{#if eq field.type 'longText'}}
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">{{field.name}}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <textarea class="textarea" placeholder="" name="{{field.name}}">{{getThing field.name}}</textarea>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    {{/each}}
+
+    <div class="is-flex is-justify-content-space-between mt-5">
+        <button class="x-close button">Cancel</button>
+        {{#if eq (session 'isUploading') true}}
+        <button class="saveButton x-saveThing button is-primary" disabled><i class="fas fa-spinner animate slow spinningLoad mr-3"></i> Save</button>
+        {{else if isSaving}}
+        <button class="saveButton x-saveThing button is-primary" disabled><i class="fas fa-spinner animate slow spinningLoad mr-3"></i> Save</button>
+        {{else}}
+            <button class="saveButton x-saveThing button is-primary">Save</button>
+        {{/if}}
+    </div>
+</template>

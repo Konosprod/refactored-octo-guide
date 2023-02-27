@@ -1,0 +1,84 @@
+<template name="listContainer">
+    <div class="cy-main-list">
+        <header>
+            {{#if eq showSelected false}}
+                {{> dropdownField label='Sort' value=defaultSort options=sortOptions onChange=onSortChange}}
+                <div class="mt-3 is-flex" style="max-width:420px">
+                    <label for="" class="is-flex is-align-items-center mr-3">Filter by
+                        {{activeFieldFilter.name}}</label>
+                    <input class="x-filterBy input" type="text" autocomplete="off" value="{{searchFilter}}" />
+                    {{> dropdownField options=searchableFields value=activeFieldFilter onChange=onSearchableFieldsChange }}
+                </div>
+                <div class="is-flex my-2" style="height:24px">
+                    {{#each tag in includeTags}}
+                        <div class="x-remove-tag-filter has-text-white rounded has-background-success px-1 mx-1 is-small select-none cursor-pointer"
+                            data-value="{{tag}}">
+                            <i class="fas fa-plus"></i>
+                            {{tag}}
+                        </div>
+                    {{/each}}
+                    {{#each tag in excludeTags}}
+                        <div class="x-remove-tag-filter has-text-white rounded has-background-danger px-1 mx-1 is-small select-none cursor-pointer"
+                            data-value="{{tag}}">
+                            <i class="fas fa-minus"></i>
+                            {{tag}}
+                        </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                {{> listTags tags=tags onChange=onTagBulkClick }}
+            {{/if}}
+            {{#if showSelected}}
+                <button class="x-bulk">Close</button>
+            {{else}}
+                <button class="x-bulk">Bulk</button>
+                <button class="x-clear-filters">CLear filters</button>
+            {{/if}}
+        </header>
+        <div>Showing {{itemCount}} things out of {{selectedList.itemCount}} in total</div>
+        <div class="is-flex relative">
+            {{#if eq showSelected false}}
+                <div
+                    class="fixed has-background-black absolute z-50 left-0 right-0 bottom-0 transition {{#if showTags}}transform-y-0{{else}}transform-y-full{{/if}}" style="overflow:auto; max-height:90vh">
+                    {{> listTags tags=tags onChange=onTagClick }}
+                </div>
+            {{/if}}
+            <div>
+                {{#if isLoading}}
+                    <p class="h-full w-full is-flex is-justify-content-center is-align-items-center">
+                        Loading things...
+                    </p>
+                {{else}}
+                    {{#if eq things.length 0}}
+                        <p class="h-full w-full is-flex is-justify-content-center is-align-items-center">
+                            Woohoo! here is a list! Wait... it's empty... Use the bottom right
+                            button to insert things!
+                        </p>
+                    {{else}}
+                    <div class="is-flex is-justify-content-center is-align-items-center is-flex-direction-column" style="padding-bottom:110px">
+                        <ul class="listContainer w-full is-flex is-flex-wrap-wrap is-justify-content-center">
+                            {{#each item in things}}
+                                {{> thing thing=item showSelected=showSelected}}
+                            {{/each}}
+                        </ul>
+                        <button class="x-load-more-things mt-5 button is-rounded" style="max-width:200px;">load more</button>
+                    </div>
+                    {{/if}}
+                {{/if}}
+            </div>
+        </div>
+        {{#if eq showSelected false}}
+            {{#if showTags}}
+                <div class="x-tagsBackdrop fixed z-40 left-0 right-0 top-0 bottom-0"></div>
+            {{/if}}
+            <button class="x-showTags button is-rounded fixed bottom-10 left-10">
+                Tags
+            </button>
+            <button class="x-addThing button is-primary is-rounded fixed bottom-10 right-10">
+                <span class="icon is-small">
+                    <i class="fas fa-plus"></i>
+                </span>
+            </button>
+        {{/if}}
+    </div>
+</template>

@@ -1,0 +1,10 @@
+<template name="inspector">
+    <div class="inspector is-flex-grow-1 is-flex-shrink-0 animate slow anim-forwards widthin-480  py-2 h-screen" style="overflow:auto">
+        <div style="min-width:480px">
+            <button class="x-close-inspector">close</button>
+            {{#if eq (session 'currentInspector') 'thingDetail'}}
+                {{> thingDetail context }}
+            {{/if}}
+        </div>
+    </div>
+</template>

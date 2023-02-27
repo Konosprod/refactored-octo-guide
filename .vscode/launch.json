@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Debug: Chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "outputCapture": "std"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug: Node",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["start"],
+            "outputCapture": "std",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Cypress",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["cypress"],
+            "preLaunchTask": "npm: cypress"
+        }
+    ],
+    "compounds": [
+        {
+            "task": "npm: start",
+            "name": "Meteor: Dev",
+            "configurations": ["Debug: Node", "Debug: Chrome"]
+        },
+    ]
+}

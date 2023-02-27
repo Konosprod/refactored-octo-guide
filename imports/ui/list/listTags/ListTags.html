@@ -1,0 +1,21 @@
+<template name="listTags">
+    <div class="is-flex w-full is-justify-content-space-between has-background-black px-2 py-2" style="position:sticky; top:0;">
+        <header>
+            Tags
+        </header>
+        <button class="x-toggle-manage-tags">
+            {{#if isManagingTags}}
+                Done
+            {{else}}
+                Manage
+            {{/if}}
+        </button>
+    </div>
+    <aside class="listsMenu menu mt-5 px-2 py-2">
+        <div class="is-flex is-flex-wrap-wrap">
+            {{#each tag in tags}}
+                {{> listTag tag=tag._id count=tag.count onClick=onChange editable=isManagingTags}}
+            {{/each}}
+        </div>
+    </aside>
+</template>

@@ -1,0 +1,12 @@
+.button.is-primary {
+    background-color: #e57cd5;
+}
+.button.is-primary.is-hovered,
+.button.is-primary:hover,
+.button.is-primary[disabled] {
+    background-color: #f3aee9;
+}
+
+.menu-list a:hover {
+    background-color: #000000;
+}

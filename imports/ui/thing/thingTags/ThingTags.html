@@ -1,0 +1,9 @@
+<template name="thingTags">
+    <ul class="is-flex overflow-hidden w-full">
+        {{#each tag in tags}}
+            <li class="is-size-7 has-text-white bg-primary rounded-sm px-1 mr-1" style="white-space: nowrap">
+                {{tag}}
+            </li>
+        {{/each}}
+    </ul>
+</template>

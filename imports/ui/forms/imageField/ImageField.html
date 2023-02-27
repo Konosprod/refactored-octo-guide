@@ -1,0 +1,39 @@
+<template name="imageField">
+    <div class="field is-horizontal is-flex">
+        <div class="field-label is-normal" style="flex-grow: 0;">
+            <label class="label">{{name}}</label>
+        </div>
+        <div class="field-body" style="width:1px; flex-grow:1">
+            <label class="file-label is-flex is-align-items-center w-full">
+                <input type="hidden" name="{{name}}" value="{{base64data}}">
+                {{#if isUploading}}
+                    <input class="file-input x-file-change is-hidden" type="file" name="" disabled />
+                {{else}}
+                    <input class="file-input x-file-change is-hidden" type="file" name="" />
+                {{/if}}
+                <div class="w-full is-flex is-justify-content-space-between is-align-items-start">
+                    <span class="file-cta ml-2" style="width: 1px; flex-grow: 1; margin-right: 20px;">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label"> {{ uploadButtonText }} </span>
+                    </span>
+                    {{#if file.url}}
+                        <div class="file-preview image is-128x128" style="position:relative">
+                            {{#if isUploading}}
+                                <div class="is-flex is-justify-content-center is-align-content-center"
+                                    style="position:absolute; top:0; left:0; right:0; bottom:0; z-index:15;">loading...
+                                </div>
+                                <div
+                                    style="background-color: white; opacity:0.7; position:absolute; top:0; left:0; right:0; bottom:0; z-index:10;">
+                                </div>
+                            {{/if}}
+                            <img class="file-preview image is-128x128 image-cover" src="{{file.url}}" alt=""
+                                style="position:absolute; top:0; left:0; right:0; bottom:0; z-index:5;" />
+                        </div>
+                    {{/if}}
+                </div>
+            </label>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,15 @@
+<template name="listTag">
+    <div class="x-list-tag-edit has-text-white bg-primary {{#if active}}bg-primary-light{{/if}} rounded-sm px-3 py-1 mx-1 my-1 cursor-pointer is-flex is-align-items-center"
+        style="white-space: nowrap;">
+        {{#if editable}}
+            <input class="x-list-tag-edit-input mr-2" type="text" value="{{tag}}">
+            <i class="{{#if isSaving}}fas fa-spinner animate slow spinningLoad{{else}}fas fa-save{{/if}} x-save-tag"
+                data-value="{{tag}}"></i>
+            <i class="fas fa-trash x-remove-tag px-2 cursor-pointer"></i>
+        {{else}}
+            <span style="user-select:none;">
+                {{tag}} ({{count}})
+            </span>
+        {{/if}}
+    </div>
+</template>

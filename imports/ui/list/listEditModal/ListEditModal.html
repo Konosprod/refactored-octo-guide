@@ -1,0 +1,34 @@
+<template name="listEditModal">
+    <header>Configure List {{list.name}}</header>
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">List name</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <input class="cy-list-name-input input" type="text" name="name" value="{{list.name}}"
+                    autocomplete="off" />
+            </div>
+        </div>
+    </div>
+    <p>CAREFUL! If you remove a field, you will lose all data associated to this field. No undo!</p>
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Fields ({{fields.length}})</label>
+        </div>
+        <div class="field-body is-flex is-flex-direction-column">
+            {{#each field in fields}}
+                {{> listFieldInput field=field onDeleteField=onDeleteField}}
+            {{/each}}
+        </div>
+    </div>
+    <div class="x-add-field button primary is-small">Add</div>
+    <div class="is-flex is-justify-content-space-between mt-5">
+        <button class="x-deleteList button is-danger">
+            Delete
+        </button>
+        <button type="submit" class="x-saveList button is-primary">
+            Save
+        </button>
+    </div>
+</template>

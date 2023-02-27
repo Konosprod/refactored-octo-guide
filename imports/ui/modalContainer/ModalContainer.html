@@ -1,0 +1,15 @@
+<template name="modalContainer">
+    <form class="modal modal-form is-active animate fadein">
+        <div class="modal-background x-close-overlay"></div>
+        <div class="modal-content animate fast slideinUp">
+            <div class="box">
+                {{#if eq (session 'currentModal') 'listEditModal'}}
+                    {{> listEditModal context }}
+                {{/if}}
+                {{#if eq (session 'currentModal') 'thingForm'}}
+                    {{> thingForm context }}
+                {{/if}}
+            </div>
+        </div>
+    </form>
+</template>

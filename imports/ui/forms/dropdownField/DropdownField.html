@@ -1,0 +1,44 @@
+<template name="dropdownField">
+    <div class="is-flex is-align-content-center">
+        {{#if label}}
+            <label for="" class="is-flex is-align-items-center mr-3">{{label}}</label>
+        {{/if}}
+        <div class="dropdown {{isActive}}">
+            <div class="x-toggleDropdown dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                    {{#if currentValue}}
+                        <span>{{currentValue.name}}</span>
+                    {{else}}
+                        <span>{{DEFAULT_PLACEHOLDER}}</span>
+                    {{/if}}
+                    <span class="icon is-small">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="dropdown-menu relative z-50" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                    {{#if eq options.length 0}}
+                        <a href="#" value="{{DEFAULT_PLACEHOLDER}}" class="x-selectOption dropdown-item">
+                            {{DEFAULT_PLACEHOLDER}}
+                        </a>
+                    {{/if}}
+                    {{#each option in options}}
+                        {{#if eq option currentValue}}
+                            <a href="#" value="{{option.value}}" class="x-selectOption dropdown-item is-active">
+                                {{option.name}}
+                            </a>
+                        {{else}}
+                            <a href="#" value="{{option.value}}" class="x-selectOption dropdown-item">
+                                {{option.name}}
+                            </a>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+            {{#if isOpen}}
+                <div class="x-backdrop fixed z-40 top-0 bottom-0 left-0 right-0"></div>
+            {{/if}}
+        </div>
+    </div>
+</template>
